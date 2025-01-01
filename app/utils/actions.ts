@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { formetCurrency } from "./formetCurrency";
 import prisma from "@/app/utils/db";
 import { revalidatePath } from "next/cache";
+import { env } from "node:process";
 
 export async function onbording(prevState: any, formdata: FormData) {
   const session = await CheakLogin();
@@ -92,7 +93,10 @@ export async function createInvoice(prevState: any, formData: FormData) {
         amount: submission.value.total,
         currency: submission.value.currency as any,
       }),
-      invoiceLink: `http://localhost:3000/api/invoices/${data.id}`,
+      invoiceLink:
+        process.env.NODE_ENV !== "production"
+          ? `http://localhost:3000/api/invoices/${data.id}`
+          : `https://invoice-grapi.vercel.app//api/invoices/${data.id}`,
     },
   });
 
@@ -179,7 +183,9 @@ export async function editInvoices(prevState: any, formData: FormData) {
         amount: submission.value.total,
         currency: submission.value.currency as any,
       }),
-      invoiceLink: `http://localhost:3000/api/invoices/${data.id}`,
+      invoiceLink:  process.env.NODE_ENV !== "production"
+      ? `http://localhost:3000/api/invoices/${data.id}`
+      : `https://invoice-grapi.vercel.app//api/invoices/${data.id}`,,
     },
   });
 
