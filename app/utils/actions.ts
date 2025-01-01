@@ -183,9 +183,10 @@ export async function editInvoices(prevState: any, formData: FormData) {
         amount: submission.value.total,
         currency: submission.value.currency as any,
       }),
-      invoiceLink:  process.env.NODE_ENV !== "production"
-      ? `http://localhost:3000/api/invoices/${data.id}`
-      : `https://invoice-grapi.vercel.app//api/invoices/${data.id}`,,
+      invoiceLink:
+        process.env.NODE_ENV !== "production"
+          ? `http://localhost:3000/api/invoices/${data.id}`
+          : `https://invoice-grapi.vercel.app//api/invoices/${data.id}`,
     },
   });
 
